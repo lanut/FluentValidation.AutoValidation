@@ -64,6 +64,15 @@ namespace SharpGrip.FluentValidation.AutoValidation.Mvc.Configuration
         /// Holds the overridden result factory. This property is meant for infrastructure and should not be used by application code.
         /// </summary>
         public Type? OverriddenResultFactory { get; private set; }
+        
+        /// <summary>
+        /// Enables the use of only synchronous validators during validation.
+        /// When set to true, only synchronous validators will be used, and asynchronous validators will be ignored.
+        /// Default value is false.
+        /// </summary>
+        /// <remarks>This option is intended for use when migrating from FluentValidation.AspNetCore.</remarks>
+        [Obsolete("This option is intended for use when migrating from FluentValidation.AspNetCore and may be removed in future versions.")]
+        public bool EnableOnlyUsingSyncValidators { get; set; } = false;
 
         /// <summary>
         /// Overrides the default result factory with a custom result factory. Custom result factories are required to implement <see cref="IFluentValidationAutoValidationResultFactory"/>.

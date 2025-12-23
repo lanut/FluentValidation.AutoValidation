@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -81,7 +82,16 @@ namespace SharpGrip.FluentValidation.AutoValidation.Mvc.Filters
                                 validationContext = globalValidationInterceptor.BeforeValidation(actionExecutingContext, validationContext) ?? validationContext;
                             }
 
-                            var validationResult = await validator.ValidateAsync(validationContext, actionExecutingContext.HttpContext.RequestAborted);
+                            ValidationResult validationResult;
+
+                            if (autoValidationMvcConfiguration.EnableOnlyUsingSyncValidators)
+                            {
+                                validationResult = validator.Validate(validationContext);
+                            }
+                            else
+                            {
+                                validationResult = await validator.ValidateAsync(validationContext, actionExecutingContext.HttpContext.RequestAborted);
+                            }
 
                             if (validatorInterceptor != null)
                             {
