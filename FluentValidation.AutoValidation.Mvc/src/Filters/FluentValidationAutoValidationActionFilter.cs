@@ -140,20 +140,20 @@ namespace SharpGrip.FluentValidation.AutoValidation.Mvc.Filters
             }
 
             return controller is ControllerBase ||
-                   controllerType.HasCustomAttribute<ControllerAttribute>() ||
-                   controllerType.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) ||
-                   controllerType.InheritsFromTypeWithNameEndingIn("Controller");
+                controllerType.HasCustomAttribute<ControllerAttribute>() ||
+                controllerType.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) ||
+                controllerType.InheritsFromTypeWithNameEndingIn("Controller");
         }
 
         private bool HasValidBindingSource(BindingSource? bindingSource)
         {
             return (autoValidationMvcConfiguration.EnableBodyBindingSourceAutomaticValidation && bindingSource == BindingSource.Body) ||
-                   (autoValidationMvcConfiguration.EnableFormBindingSourceAutomaticValidation && bindingSource == BindingSource.Form) ||
-                   (autoValidationMvcConfiguration.EnableQueryBindingSourceAutomaticValidation && bindingSource == BindingSource.Query) ||
-                   (autoValidationMvcConfiguration.EnablePathBindingSourceAutomaticValidation && bindingSource == BindingSource.Path) ||
-                   (autoValidationMvcConfiguration.EnableHeaderBindingSourceAutomaticValidation && bindingSource == BindingSource.Header) ||
-                   (autoValidationMvcConfiguration.EnableCustomBindingSourceAutomaticValidation && bindingSource == BindingSource.Custom) ||
-                   (autoValidationMvcConfiguration.EnableNullBindingSourceAutomaticValidation && bindingSource == null);
+                (autoValidationMvcConfiguration.EnableFormBindingSourceAutomaticValidation && bindingSource == BindingSource.Form) ||
+                (autoValidationMvcConfiguration.EnableQueryBindingSourceAutomaticValidation && bindingSource == BindingSource.Query) ||
+                (autoValidationMvcConfiguration.EnablePathBindingSourceAutomaticValidation && bindingSource == BindingSource.Path) ||
+                (autoValidationMvcConfiguration.EnableHeaderBindingSourceAutomaticValidation && bindingSource == BindingSource.Header) ||
+                (autoValidationMvcConfiguration.EnableCustomBindingSourceAutomaticValidation && bindingSource == BindingSource.Custom) ||
+                (autoValidationMvcConfiguration.EnableNullBindingSourceAutomaticValidation && bindingSource == null);
         }
 
         private void HandleUnvalidatedEntries(ActionExecutingContext context)
